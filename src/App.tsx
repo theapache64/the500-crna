@@ -1,23 +1,43 @@
-import { default as React } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * 
+ * Generated with the TypeScript template
+ * https://github.com/emin93/react-native-template-typescript
+ */
+import { default as React, Component } from 'react';
+import { createStackNavigator } from 'react-navigation';
+import { SplashScreen } from './screens/SplashScreen';
+import { PlayerNameScreen } from './screens/PlayerNameScreen';
+import { GameScreen } from './screens/GameScreen';
+import { ResultScreen } from './screens/ResultScreen';
+import { GameResult } from './components/Result';
+import { InformationScreen } from './screens/InformationScreen';
 
-export class App extends React.Component {
+const ROOT_STACK = createStackNavigator(
+  {
+    SplashScreen,
+    PlayerNameScreen,
+    InformationScreen,
+    GameScreen,
+    ResultScreen,
+  },
+  {
+    initialRouteName: 'SplashScreen',
+    initialRouteParams: {
+      playerOneResult: GameResult.WINNER,
+      playerTwoResult: GameResult.LOSER,
+
+      playerOneName: 'SAFIYA',
+      playerTwoName: 'SHIFAR',
+    },
+    headerMode: 'none',
+  });
+
+export class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <ROOT_STACK />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
